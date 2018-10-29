@@ -17,7 +17,6 @@ public class UpdateFarmList implements Runnable {
 	///				System.out.println("request send to farm for cpu usages");
 					String msg = farmSocket.receivePrimeFromFarm();
 					System.out.println("Farm with ip = "+farmId.ipaddress.getHostAddress()+"and port numbrer = "+ farmId.port +" has cpu utilization = " + msg);
-					
 					farmSocket.closeFarm();
 					farmId.cpuUtilisation = Double.parseDouble(msg.trim());
 				} catch (IOException e) {
@@ -27,8 +26,6 @@ public class UpdateFarmList implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
 				
 				try {
 					Thread.sleep(10000);
