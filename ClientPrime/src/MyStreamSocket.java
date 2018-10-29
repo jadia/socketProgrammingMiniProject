@@ -12,7 +12,7 @@ public class MyStreamSocket {
 	private Socket socket;
 	private BufferedReader input;
 	private PrintWriter output;
-
+	InputStream inStream = null;
 	MyStreamSocket(String acceptorHost, int acceptorPort) throws SocketException, IOException {
 		socket = new Socket(acceptorHost, acceptorPort);
 		setStreams();
@@ -25,7 +25,7 @@ public class MyStreamSocket {
 */
 	private void setStreams() throws IOException {
 		// get an input stream for reading from the data socket
-		InputStream inStream = socket.getInputStream();
+	 inStream = socket.getInputStream();
 		input = new BufferedReader(new InputStreamReader(inStream));
 		OutputStream outStream = socket.getOutputStream();
 		// create a PrinterWriter object for character-mode output
@@ -38,14 +38,15 @@ public class MyStreamSocket {
 		// be written to the socket data stream before the
 		// socket is closed.
 		output.flush();
-	System.out.println("message send from client is ="+message);
 	} // end sendMessage
 
 	public String receiveMessage() throws IOException {
 		// read a line from the data stream
+	byte[] msg = new byte[1000];
 		System.out.println("Waiting for message...");
-		String message = input.readLine();
-		System.out.println("Got the message!"+message);
+		inStream.read(msg);
+		String message = new String(msg);
+		System.out.println("Got the message"+message);
 		return message;
 	} // end receiveMessage
 

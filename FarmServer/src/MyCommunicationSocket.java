@@ -22,17 +22,23 @@ public class MyCommunicationSocket {
 	}
 
 	public void sendMessage(String msg) throws Exception {
+		
+		
 		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
 		bufferedWriter.write(msg);
 		bufferedWriter.flush();
-		System.out.println("prime nuberSend is " + msg);
+		System.out.println("Message send to server is " + msg);
 	}
 
 	public String receaveMsg() throws Exception {
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-		System.out.println("checkpoint 1");
-		String receavedmsg = bufferedReader.readLine();
-		System.out.println("checkpoint 1");
+		System.out.println("inside receive function");
+		//BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+		byte msg[] = new byte[100];
+		inputStream.read(msg);
+		System.out.println("buffered  reader initiated");
+		String receavedmsg = new String(msg);
+		
+		
 		System.out.println("Message Received at farm is =" + receavedmsg);
 		return receavedmsg;
 

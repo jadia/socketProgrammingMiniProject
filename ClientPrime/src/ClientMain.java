@@ -1,36 +1,37 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 
-public class Client {
+public class ClientMain {
+	public static void main(String[] args) throws Exception {
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-	public static void main(String[] args) {
+		System.out.println("Enter the server's ip address = ");
+		String acceptorHost = bufferedReader.readLine();
 
-		if (args.length != 2)
-			System.out.println("This program requires three command line arguments <serverIP><serverport>.");
-		else {
-			try {
-				String acceptorHost = args[0];
-				// this is change to github
-				int acceptorPort = Integer.parseInt(args[1]);
+		System.out.println("Enter the port address of server");
+		int acceptorPort = Integer.parseInt(bufferedReader.readLine()); // instantiates a data socket
+		MyStreamSocket mySocket = new MyStreamSocket(acceptorHost, acceptorPort);
+		boolean more = true;
+		System.out.println("<====Enter done when want to stop the service====> ");
 
-				// instantiates a data socket
-				MyStreamSocket mySocket = new MyStreamSocket(acceptorHost, acceptorPort);
-				/**/ System.out.println("Connection request granted");
-				System.out.println("Enter the upper limit of the number ");
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-				String message = bufferedReader.readLine();
+		while (more) {
+			
+			System.out.println("Enter the number ");
+			String message = bufferedReader.readLine();
 
-				mySocket.sendMessage(message);
-				/**/ System.out.println("Message sent: " + message);
-				message = mySocket.receiveMessage();
-				System.out.println("Received message: " + message);
-				mySocket.close();
-				System.out.println("data socket closed");
-			} // end try
-			catch (Exception ex) {
-				ex.printStackTrace();
+			if (message.trim().equalsIgnoreCase("done")) {
+				more = false;
+				break;
 			}
-		} // end else
-	} // end main
+
+			mySocket.sendMessage(message);
+System.out.println("message sent from client = "+message);
+			message = mySocket.receiveMessage();
+			}
+		mySocket.close();
+		// end try
+	} // end else
+	// end main
 
 }

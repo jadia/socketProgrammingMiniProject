@@ -3,23 +3,26 @@ import java.util.Random;
 
 public class FarmProvider {
 	public static ArrayList<FarmId> listoffarms;
-public FarmProvider() {
-	// TODO Auto-generated constructor stub
-	listoffarms = new ArrayList<>();
-	
-}
-	public static FarmId getFreeFarm() {
-		
-		Random random= new Random();
-		
-		return listoffarms.get(random.nextInt(listoffarms.size()));
-		
-		 
+static int counter = 0;
+	public FarmProvider() {
+		// TODO Auto-generated constructor stub
+		listoffarms = new ArrayList<>();
+
 	}
-	public void updateFarmList() {
-		
+
+	public synchronized static FarmId getFreeFarm() {
+/*		double currentLeastUtilization = 0.0;
+		int currentIndex = 0;
+		for (int i = 0; i < listoffarms.size(); i++) {
+			if (listoffarms.get(i).cpuUtilisation < currentLeastUtilization) {
+				currentLeastUtilization = listoffarms.get(i).cpuUtilisation;
+				currentIndex = i;
+			}
+		}
+*/
+		counter = (counter+1)%listoffarms.size();
+		return listoffarms.get(counter);
+
 	}
-	
-	
 
 }

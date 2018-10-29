@@ -29,6 +29,9 @@ public class ClientSocket {
 			e.printStackTrace();
 		}
 	}
+	public String getClientIpAddress() {
+		return clientSocket.getInetAddress().getHostAddress();
+	}
 
 	public void sendMessage(String data)throws Exception {
 		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
@@ -40,7 +43,7 @@ public class ClientSocket {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 		
 		String data= bufferedReader.readLine();
-	System.out.println("number received  = "+data);
+	System.out.println("message received  = "+data);
 	return data;
 	}
 }
