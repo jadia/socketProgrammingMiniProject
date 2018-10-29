@@ -62,7 +62,7 @@ public class ServerMain {
 // update server thread start hear
 		
 		Thread updaterTHread = new Thread(new UpdateFarmList());
-//		updaterTHread.start();
+		updaterTHread.start();
 
 		while (true) {
 Client client= new Client(new ClientSocket(clientServerSocket.accept()));
