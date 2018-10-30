@@ -11,7 +11,6 @@ public class Myservice {
 
 	public String getCpuUsages() {
 		OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
-
 		return Double.toString(osBean.getSystemLoadAverage());
 	}
 

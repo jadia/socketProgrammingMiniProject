@@ -10,14 +10,12 @@ public class CPUutilizationRunnable implements Runnable {
 	int port;
 
 	public CPUutilizationRunnable(InetAddress inetAddress, int port) {
-		// TODO Auto-generated constructor stub
 		this.inetAddress = inetAddress;
 		this.port = port;
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try {
 			cpuServerSocket = new ServerSocket(port + 1, 100, inetAddress);
 			while (true) {

@@ -5,19 +5,19 @@ import java.net.InetAddress;
 public class ClientMain {
 	public static void main(String[] args) throws Exception {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
-		System.out.println("Enter the server's ip address = ");
+		
+		System.out.print("Server IP: ");
 		String acceptorHost = bufferedReader.readLine();
 
-		System.out.println("Enter the port address of server");
+		System.out.print("Server Port: ");
 		int acceptorPort = Integer.parseInt(bufferedReader.readLine()); // instantiates a data socket
 		MyStreamSocket mySocket = new MyStreamSocket(acceptorHost, acceptorPort);
 		boolean more = true;
-		System.out.println("<====Enter done when want to stop the service====> ");
+		System.out.println("<====Type DONE to stop the service====> ");
 
 		while (more) {
-			
-			System.out.println("Enter the number ");
+			System.out.println("");
+			System.out.print("Number: ");
 			String message = bufferedReader.readLine();
 
 			if (message.trim().equalsIgnoreCase("done")) {
@@ -26,12 +26,9 @@ public class ClientMain {
 			}
 
 			mySocket.sendMessage(message);
-System.out.println("message sent from client = "+message);
+			System.out.println("** " + message + " sent to the server. **");
 			message = mySocket.receiveMessage();
-			}
+		}
 		mySocket.close();
-		// end try
-	} // end else
-	// end main
-
+	}
 }

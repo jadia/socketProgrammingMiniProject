@@ -14,7 +14,6 @@ public class MyCommunicationSocket {
 	OutputStream outputStream = null;
 
 	public MyCommunicationSocket(Socket s) throws Exception {
-		// TODO Auto-generated constructor stub
 		newConnection = s;
 		inputStream = newConnection.getInputStream();
 		outputStream = newConnection.getOutputStream();
@@ -22,24 +21,24 @@ public class MyCommunicationSocket {
 	}
 
 	public void sendMessage(String msg) throws Exception {
-		
-		
+
 		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
 		bufferedWriter.write(msg);
 		bufferedWriter.flush();
-		System.out.println("Message send to server is " + msg);
+		// System.out.println("Message send to server is " + msg);
 	}
 
 	public String receaveMsg() throws Exception {
-		System.out.println("inside receive function");
-		//BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+		// System.out.println("inside receive function");
+		// BufferedReader bufferedReader = new BufferedReader(new
+		// InputStreamReader(inputStream));
 		byte msg[] = new byte[100];
 		inputStream.read(msg);
-		System.out.println("buffered  reader initiated");
+		// System.out.println("buffered reader initiated");
 		String receavedmsg = new String(msg);
-		
-		
-		System.out.println("Message Received at farm is =" + receavedmsg);
+
+		System.out.println("");
+		System.out.println("Message Received at farm is = " + receavedmsg);
 		return receavedmsg;
 
 	}

@@ -16,22 +16,25 @@ public class FarmMain {
 
 	public static void initialise() throws Exception {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter this farm severs's ip address =  ");
+		System.out.println("");
+		System.out.print("This farm's IP: ");
 		myipaddress = InetAddress.getByName(bufferedReader.readLine());
-		System.out.println("Enter the port you want to listen = ");
+		System.out.print("Port: ");
 		myport = Integer.parseInt(bufferedReader.readLine());
 		socket = new ServerSocket(myport, 100, myipaddress);
+		System.out.println("");
 		System.out.println("<-------FarmServer is running-------->");
 		Thread thread = new Thread(new CPUutilizationRunnable(myipaddress, myport));
 		thread.start();
-		System.out.println("<------cpu request server is also running----->");
+		System.out.println("<------CPU request server also running----->");
 		while (true) {
 			MyCommunicationSocket communicationSocket = new MyCommunicationSocket(socket.accept());
 			Myservice myservice = new Myservice();
 			String msg = communicationSocket.receaveMsg();
 			int prime = myservice.generatePrime(msg);
 			communicationSocket.sendMessage(Integer.toString(prime));
-			System.out.println("prime number send to server is =" + prime);
+			System.out.println("Prime number: " + prime);
+			System.out.println("");
 
 		}
 	}

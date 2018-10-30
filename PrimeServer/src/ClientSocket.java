@@ -37,13 +37,13 @@ public class ClientSocket {
 		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
 	bufferedWriter.write(data);
 		bufferedWriter.flush();
-		System.out.println("message send "+data);
+		System.out.println("Data sent to client: "+data);
 	}
 	public String receiveMessage()throws Exception {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 		
 		String data= bufferedReader.readLine();
-	System.out.println("message received  = "+data);
+	//System.out.println("message received  = "+data);
 	return data;
 	}
 }

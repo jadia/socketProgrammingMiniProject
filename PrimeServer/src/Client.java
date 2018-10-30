@@ -16,9 +16,10 @@ public class Client implements Runnable {
 		String data = null;
 		try {
 		while(true) {
-			System.out.println("waiting for input of number");
+			System.out.println("");
+			//System.out.println("waiting for input of number");
 			data = receiveDataFromClient();
-			System.out.println("data received from client  = " + data);
+			System.out.println("Data received from client:" + data);
 
 			String result;
 			result = startprocessTosendandReceivePrimeNumber(data);
@@ -40,8 +41,9 @@ public class Client implements Runnable {
 
 	public String startprocessTosendandReceivePrimeNumber(String data) throws Exception {
 		FarmId farmId = FarmProvider.getFreeFarm();
-		System.out.println("Farm allocated to client having ip address " + clientSocket.getClientIpAddress() + " is  = "
-				+ farmId.ipaddress.getHostAddress() + "and port number of farm is " + farmId.port);
+		System.out.println("Farm allocation info:");
+		System.out.println("Client IP: " + clientSocket.getClientIpAddress() + " got Farm at: "
+				+ farmId.ipaddress.getHostAddress() + ", " + farmId.port);
 		FarmSocket farmSocket = new FarmSocket(new Socket(farmId.ipaddress, farmId.port));
 		// System.out.println("farm socket creted ");
 		farmSocket.sendNumberToFarmtoFindPrimeNumber(data);

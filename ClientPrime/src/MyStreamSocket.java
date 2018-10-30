@@ -43,10 +43,11 @@ public class MyStreamSocket {
 	public String receiveMessage() throws IOException {
 		// read a line from the data stream
 	byte[] msg = new byte[1000];
-		System.out.println("Waiting for message...");
+		System.out.println("Waiting for result...");
 		inStream.read(msg);
 		String message = new String(msg);
-		System.out.println("Got the message"+message);
+		System.out.println("");
+		System.out.println("Result: "+message);
 		return message;
 	} // end receiveMessage
 

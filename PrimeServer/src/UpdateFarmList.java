@@ -16,7 +16,7 @@ public class UpdateFarmList implements Runnable {
 					farmSocket.sendNumberToFarmtoFindPrimeNumber("cpu");
 	///				System.out.println("request send to farm for cpu usages");
 					String msg = farmSocket.receivePrimeFromFarm();
-					System.out.println("Farm with ip = "+farmId.ipaddress.getHostAddress()+"and port numbrer = "+ farmId.port +" has cpu utilization = " + msg);
+					System.out.println("Farm IP: "+farmId.ipaddress.getHostAddress()+", Port: "+ farmId.port +", CPU: " + msg);
 					farmSocket.closeFarm();
 					farmId.cpuUtilisation = Double.parseDouble(msg.trim());
 				} catch (IOException e) {
