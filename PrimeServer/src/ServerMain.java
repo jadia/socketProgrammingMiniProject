@@ -65,9 +65,7 @@ public class ServerMain {
 		System.out.println("<=======Server is running for client=======> ");
 // update server thread start hear
 
-		Thread updaterTHread = new Thread(new UpdateFarmList());
-		updaterTHread.start();
-
+	
 		while (true) {
 			Client client = new Client(new ClientSocket(clientServerSocket.accept()));
 			//System.out.println("client created");

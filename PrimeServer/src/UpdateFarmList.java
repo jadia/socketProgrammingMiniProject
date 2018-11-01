@@ -1,13 +1,12 @@
 import java.io.IOException;
 import java.net.Socket;
 
-public class UpdateFarmList implements Runnable {
+public class UpdateFarmList  {
 
-	@Override
-	public void run() {
+
+	public void runMethod() {
 		// TODO Auto-generated method stub
-		while (true) {
-
+	
 			for (int i = 0; i < FarmProvider.listoffarms.size(); i++) {
 				FarmId farmId = FarmProvider.listoffarms.get(i);
 				try {
@@ -27,15 +26,8 @@ public class UpdateFarmList implements Runnable {
 					e.printStackTrace();
 				}
 				
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			}
 		}
 
 	}
 
-}

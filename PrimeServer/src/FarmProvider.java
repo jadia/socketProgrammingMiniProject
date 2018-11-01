@@ -11,7 +11,7 @@ static int counter = 0;
 	}
 
 	public synchronized static FarmId getFreeFarm() {
-/*		double currentLeastUtilization = 0.0;
+		double currentLeastUtilization = 1.0;
 		int currentIndex = 0;
 		for (int i = 0; i < listoffarms.size(); i++) {
 			if (listoffarms.get(i).cpuUtilisation < currentLeastUtilization) {
@@ -19,9 +19,8 @@ static int counter = 0;
 				currentIndex = i;
 			}
 		}
-*/
-		counter = (counter+1)%listoffarms.size();
-		return listoffarms.get(counter);
+		//counter = (counter+1)%listoffarms.size();
+		return listoffarms.get(currentIndex);
 
 	}
 

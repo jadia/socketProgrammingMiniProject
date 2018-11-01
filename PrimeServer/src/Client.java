@@ -20,7 +20,9 @@ public class Client implements Runnable {
 			//System.out.println("waiting for input of number");
 			data = receiveDataFromClient();
 			System.out.println("Data received from client:" + data);
-
+			UpdateFarmList farmList = new UpdateFarmList();
+			farmList.runMethod();
+			
 			String result;
 			result = startprocessTosendandReceivePrimeNumber(data);
 			sendBackToClientResult(result);
