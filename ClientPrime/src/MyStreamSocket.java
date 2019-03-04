@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -13,19 +14,20 @@ public class MyStreamSocket {
 	private BufferedReader input;
 	private PrintWriter output;
 	InputStream inStream = null;
+
 	MyStreamSocket(String acceptorHost, int acceptorPort) throws SocketException, IOException {
-		socket = new Socket(acceptorHost, acceptorPort);
+		InetAddress address = InetAddress.getByName(acceptorHost);
+		socket = new Socket(address, acceptorPort);
 		setStreams();
 	}
-/*
-	MyStreamSocket(Socket socket) throws IOException {
-		this.socket = socket;
-		setStreams();
-	}
-*/
+
+	/*
+	 * MyStreamSocket(Socket socket) throws IOException { this.socket = socket;
+	 * setStreams(); }
+	 */
 	private void setStreams() throws IOException {
 		// get an input stream for reading from the data socket
-	 inStream = socket.getInputStream();
+		inStream = socket.getInputStream();
 		input = new BufferedReader(new InputStreamReader(inStream));
 		OutputStream outStream = socket.getOutputStream();
 		// create a PrinterWriter object for character-mode output
@@ -42,12 +44,12 @@ public class MyStreamSocket {
 
 	public String receiveMessage() throws IOException {
 		// read a line from the data stream
-	byte[] msg = new byte[1000];
+		byte[] msg = new byte[1000];
 		System.out.println("Waiting for result...");
 		inStream.read(msg);
 		String message = new String(msg);
 		System.out.println("");
-		System.out.println("Result: "+message);
+		System.out.println("Result: " + message);
 		return message;
 	} // end receiveMessage
 
