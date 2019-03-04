@@ -9,6 +9,7 @@ public class ServerMain {
 	static InetAddress serverIpAddress = null;
 	int farmListenport;
 	int clientListenPort;
+	int workerNodeConnectionPort = 2222;
 	static FarmProvider farmprovider = null;
 	ServerSocket farmSocket = null;
 	ServerSocket clientServerSocket = null;
@@ -29,7 +30,11 @@ public class ServerMain {
 	}
 
 	public void initializationFarms() throws Exception {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
+		Thread worketConnect = new Thread(new WorkerNodeConnection(workerNodeConnectionPort));
+		worketConnect.start();
+		
+		/*BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("");
 		System.out.println("");
 		System.out.println("Farm settings->");
@@ -52,7 +57,7 @@ public class ServerMain {
 			FarmId farmId = farmprovider.listoffarms.get(i);
 			System.out.println("Farm Number = " + (i + 1) + "-> IP: " + farmId.ipaddress.getHostAddress() + ", Port: "
 					+ farmId.port);
-		}
+		}*/
 	}
 
 	public void acceptClientConnectionToServicce() throws Exception {
